@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:video_flutter_demo/domain/video.dart';
 
-class VideoListItem extends StatelessWidget {
-  final Video video;
+import '../../tools/routes.dart';
 
-  const VideoListItem(this.video, {Key? key}) : super(key: key);
+class VideoListItem extends StatelessWidget {
+  final Video _video;
+
+  const VideoListItem(this._video, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.network(video.thumbnailUrl),
-            Text(video.title, style: const TextStyle(fontWeight: FontWeight.bold),),
-            Text(" ${video.viewsTotal ?? 0} views")
-          ],
-        );
+    return GestureDetector(
+      onTap: () => Navigator.push(context, videoDetailsRoute(_video)),
+      child: Column(
+        children: [
+          Image.network(_video.thumbnailUrl),
+          Text(
+            _video.title,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(_video.author ?? "")
+        ],
+      ),
+    );
   }
 }
