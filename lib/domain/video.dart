@@ -4,18 +4,18 @@ import 'comment.dart';
 
 part 'video.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class Video {
   String id;
   String thumbnailUrl;
-  int? viewsTotal;
   String title;
   String? description;
-  int? duration;
+  String? author;
+  String sourceUrl;
   List<Comment>? comments;
   List<Video>? suggestedVideos;
 
-  Video({required this.id, required this.title, required this.thumbnailUrl});
+  Video({required this.id, required this.title, required this.thumbnailUrl, required this.sourceUrl});
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
   Map<String, dynamic> toJson() => _$VideoToJson(this);

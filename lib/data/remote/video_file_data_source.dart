@@ -13,7 +13,6 @@ class VideoFileDataSource implements VideoDataSource {
   Future<List<Video>> getVideos() async {
     final json = await rootBundle.loadString(_videoJson);
     final videosResponse = VideosResponse.fromJson(jsonDecode(json));
-    print(videosResponse.list);
-    return videosResponse.list ?? List.empty();
+    return videosResponse.videos ?? List.empty();
   }
 }

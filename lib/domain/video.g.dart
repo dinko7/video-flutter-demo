@@ -9,25 +9,25 @@ part of 'video.dart';
 Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       id: json['id'] as String,
       title: json['title'] as String,
-      thumbnailUrl: json['thumbnail_url'] as String,
+      thumbnailUrl: json['thumbnailUrl'] as String,
+      sourceUrl: json['sourceUrl'] as String,
     )
-      ..viewsTotal = json['views_total'] as int?
       ..description = json['description'] as String?
-      ..duration = json['duration'] as int?
+      ..author = json['author'] as String?
       ..comments = (json['comments'] as List<dynamic>?)
           ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
           .toList()
-      ..suggestedVideos = (json['suggested_videos'] as List<dynamic>?)
+      ..suggestedVideos = (json['suggestedVideos'] as List<dynamic>?)
           ?.map((e) => Video.fromJson(e as Map<String, dynamic>))
           .toList();
 
 Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
       'id': instance.id,
-      'thumbnail_url': instance.thumbnailUrl,
-      'views_total': instance.viewsTotal,
+      'thumbnailUrl': instance.thumbnailUrl,
       'title': instance.title,
       'description': instance.description,
-      'duration': instance.duration,
+      'author': instance.author,
+      'sourceUrl': instance.sourceUrl,
       'comments': instance.comments,
-      'suggested_videos': instance.suggestedVideos,
+      'suggestedVideos': instance.suggestedVideos,
     };

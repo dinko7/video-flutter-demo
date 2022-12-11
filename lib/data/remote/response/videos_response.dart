@@ -3,14 +3,9 @@ import 'package:video_flutter_demo/domain/video.dart';
 
 part 'videos_response.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class VideosResponse {
-  int? page;
-  int? limit;
-  bool? explicit;
-  int? total;
-  bool? hasMore;
-  List<Video>? list;
+  List<Video>? videos;
 
   VideosResponse();
 
