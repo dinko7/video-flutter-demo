@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:video_flutter_demo/ui/widget/video_details/comments.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../domain/video.dart';
@@ -19,26 +20,36 @@ class _VideoDetailsScreenState extends ConsumerState<VideoDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(
-        widget._video.sourceUrl)
+    _controller = VideoPlayerController.network(widget._video.sourceUrl)
       ..initialize().then((_) {
         setState(() {
-         if (!_controller.value.isPlaying) {
-           _controller.play();
-         }
+          if (!_controller.value.isPlaying) {
+            _controller.play();
+          }
         });
       });
   }
 
   @override
   Widget build(BuildContext context) {
-    return _controller.value.isInitialized
-              ? AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: VideoPlayer(_controller),
-          )
-              : Container();
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            _videoPlayer(),
+            Comments(widget._video.comments ?? List.empty())
+          ],
+        ),
+      ),
+    );
   }
+
+  Widget _videoPlayer() => _controller.value.isInitialized
+      ? AspectRatio(
+          aspectRatio: 16 / 9,
+          child: VideoPlayer(_controller),
+        )
+      : Container();
 
   @override
   void dispose() {
