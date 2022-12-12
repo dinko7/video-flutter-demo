@@ -3,10 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:video_flutter_demo/ui/widget/home/home_screen.dart';
+import 'package:video_flutter_demo/ui/widget/login/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   runZonedGuarded(() async {
     runApp(const ProviderScope(child: MyApp()));
@@ -26,7 +28,7 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: const LoginScreen(),
     );
   }
 }
